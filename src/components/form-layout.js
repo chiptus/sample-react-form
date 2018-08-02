@@ -6,7 +6,7 @@ import ProgressBar from "./progress-bar";
 import "./form-layout.css";
 
 export default ({ children, currentStep }) => (
-  <form className="form-layout">
+  <form className="formLayout">
     <ProgressBar currentStep={currentStep} />
     {children}
     <NavigationBar currentStep={currentStep} />
