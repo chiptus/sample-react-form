@@ -1,6 +1,26 @@
-.form-layout {
+.formLayout {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+}
+
+.formLayout .container {
+}
+
+.formLayout .container * + * {
+  margin-top: 1em;
+}
+
+.formLayout .errors {
+  display: none;
+}
+
+.formLayout .input input,
+.formLayout .input select {
+  width: 100%;
+}
+
+.formLayout .requirements {
+  font-size: 0.8em;
 }

@@ -8,13 +8,17 @@ import FormLayout from "../components/form-layout";
 
 export default () => (
   <FormLayout currentStep={3} StepTimezoneScreen>
-    <div>Please choose your timezone</div>
-    <select required>
-      {TzIds.map(tz => (
-        <option key={tz} value={tz}>
-          {tz}
-        </option>
-      ))}
-    </select>
+    <div className="container">
+      <label className="label">Please choose your timezone</label>
+      <div className="input">
+        <select required>
+          {TzIds.map(tz => (
+            <option key={tz} value={tz}>
+              {tz}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   </FormLayout>
 );

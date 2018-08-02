@@ -9,9 +9,9 @@ import FormLayout from "../components/form-layout";
 
 export default () => (
   <FormLayout currentStep={1}>
-    <div>
-      <div>Please enter your email address</div>
-      <div>
+    <div className="container">
+      <label className="label">Please enter your email address</label>
+      <div className="input">
         <input type="email" required />
       </div>
       <div className="errors">

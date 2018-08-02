@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
+import stylesheet from "./navigation-bar.css";
+
 const Steps = ({ currentStep }) => (
-  <div>
+  <div className={stylesheet.navigationBar}>
     <NavLink disabled={currentStep === 1} to={`/step${currentStep - 1}`}>
       Prev
     </NavLink>

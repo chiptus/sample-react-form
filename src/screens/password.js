@@ -5,18 +5,20 @@ import React from "react";
 
 import FormLayout from "../components/form-layout";
 
+import stylesheet from "./password.css";
+
 export default () => (
   <FormLayout currentStep={2}>
-    <div>
-      <div>Please choose a password</div>
-      <div>
+    <div className="container">
+      <label className="label">Please choose a password</label>
+      <div className="input">
         <input type="password" />
       </div>
       <div className="errors">
         <div>Password is required</div>
         <div>Password is not strong enough</div>
       </div>
-      <div classname="password-requirements">
+      <div className="requirements">
         Must be at least 8 characters<br />
         Must have letters, numbers, and symbols only<br />
         Must not allow two characters to repeat more than twice in a row<br />

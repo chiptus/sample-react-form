@@ -1,15 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./progress-bar.css";
+import stylesheet from "./progress-bar.css";
 
 const ProgresBar = ({ currentStep }) => (
-  <div className="progress-bar">
-    <ul className="steps">
-      <li className={`step ${currentStep === 1 ? "active" : ""}`}>Step 1</li>
-      <li className={`step ${currentStep === 2 ? "active" : ""}`}>Step 2</li>
-      <li className={`step ${currentStep === 3 ? "active" : ""}`}>Step 3</li>
+  <div>
+    <ul className={stylesheet.steps}>
+      <li
+        className={`${stylesheet.step} ${
+          currentStep === 1 ? stylesheet.active : ""
+        }`}
+      >
+        Step 1
+      </li>
+      <li
+        className={`${stylesheet.step} ${
+          currentStep === 2 ? stylesheet.active : ""
+        }`}
+      >
+        Step 2
+      </li>
+      <li
+        className={`${stylesheet.step} ${
+          currentStep === 3 ? stylesheet.active : ""
+        }`}
+      >
+        Step 3
+      </li>
     </ul>
-    <div className={`bar bar${((currentStep - 1) / 2) * 100}`} />
+    <div
+      className={`${stylesheet.bar} ${stylesheet.bar}${((currentStep - 1) / 2) *
+        100}`}
+    />
   </div>
 );
 
