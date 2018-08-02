@@ -1,14 +1,16 @@
-import React from "react";
-import { render } from "react-dom";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
-import Router from "./router.js";
+import React from 'react';
+import { render } from 'react-dom';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import Router from './router.js';
 
-import "normalize.css";
-import "./index.css";
+import 'normalize.css';
+
+import './index.css';
 
 const client = new ApolloClient({
-  uri: "https://api-uswest.graphcms.com/v1/cjjyp75qg035v01gmm81qwjhd/master"
+  uri:
+    'https://api-uswest.graphcms.com/v1/cjjyp75qg035v01gmm81qwjhd/master',
 });
 
 const App = function App() {
@@ -19,4 +21,4 @@ const App = function App() {
   );
 };
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));

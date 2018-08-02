@@ -1,6 +1,16 @@
-import React from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import { EmailScreen, PasswordScreen, TimezoneScreen } from "./screens";
+import React from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
+import {
+  EmailScreen,
+  PasswordScreen,
+  TimezoneScreen,
+} from './screens';
+
 const Router = function Router() {
   //Put your routes inside the BrowserRouterStep
   return (
