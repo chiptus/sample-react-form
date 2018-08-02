@@ -5,14 +5,12 @@ const Router = function Router() {
   //Put your routes inside the BrowserRouterStep
   return (
     <BrowserRouter>
-      <div>
-        <Switch>
-          <Route path="/step1" component={EmailScreen} />
-          <Route path="/step2" component={PasswordScreen} />
-          <Route path="/step3" component={TimezoneScreen} />
-          <Redirect exact from="/" to="/step1" />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/step1" component={EmailScreen} />
+        <Route path="/step2" component={PasswordScreen} />
+        <Route path="/step3" component={TimezoneScreen} />
+        <Redirect exact from="/" to="/step1" />
+      </Switch>
     </BrowserRouter>
   );
 };

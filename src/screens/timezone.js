@@ -3,11 +3,18 @@
 // * The timezone names are available using 'tz-ids' library provided for you
 // * The button saves to the database using a GraphQL mutation
 import React from "react";
-
+import TzIds from "tz-ids";
 import FormLayout from "../components/form-layout";
 
 export default () => (
   <FormLayout currentStep={3} StepTimezoneScreen>
-    Timezone
+    <div>Please choose your timezone</div>
+    <select required>
+      {TzIds.map(tz => (
+        <option key={tz} value={tz}>
+          {tz}
+        </option>
+      ))}
+    </select>
   </FormLayout>
 );

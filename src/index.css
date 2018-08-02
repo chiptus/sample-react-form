@@ -1,4 +1,13 @@
 a[disabled] {
   pointer-events: none;
+  cursor: not-allowed;
 }
-PrevStep 1Step 2Step 3Next
+
+#app {
+  width: 60%;
+  margin: auto;
+  height: 150px;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 1em;
+}

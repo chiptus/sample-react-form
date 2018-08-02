@@ -7,4 +7,18 @@ import React from "react";
 
 import FormLayout from "../components/form-layout";
 
-export default () => <FormLayout currentStep={1}>Email</FormLayout>;
+export default () => (
+  <FormLayout currentStep={1}>
+    <div>
+      <div>Please enter your email address</div>
+      <div>
+        <input type="email" required />
+      </div>
+      <div className="errors">
+        <div>Email is required</div>
+        <div>Input is not a valid email</div>
+        <div>Email is in use</div>
+      </div>
+    </div>
+  </FormLayout>
+);

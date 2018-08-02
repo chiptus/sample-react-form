@@ -4,6 +4,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Router from "./router.js";
 
+import "normalize.css";
 import "./index.css";
 
 const client = new ApolloClient({
