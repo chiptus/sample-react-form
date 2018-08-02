@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import NavigationBar from "./navigation-bar";
-import ProgressBar from "./progress-bar";
+import NavigationBar from './navigation-bar';
+import ProgressBar from './progress-bar';
 
-import "./form-layout.css";
+import './form-layout.css';
 
-export default ({ children, currentStep }) => (
+const FormLayout = ({ children, currentStep, onSubmit }) => (
   <form className="formLayout">
     <ProgressBar currentStep={currentStep} />
     {children}
-    <NavigationBar currentStep={currentStep} />
+    <NavigationBar currentStep={currentStep} onSubmit={onSubmit} />
   </form>
 );
+
+export default FormLayout;

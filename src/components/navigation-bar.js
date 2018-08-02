@@ -1,23 +1,31 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
-import stylesheet from "./navigation-bar.css";
+import stylesheet from './navigation-bar.css';
 
-const Steps = ({ currentStep }) => (
+const Steps = ({ currentStep, onSubmit }) => (
   <div className={stylesheet.navigationBar}>
-    <NavLink disabled={currentStep === 1} to={`/step${currentStep - 1}`}>
+    <button
+      disabled={currentStep === 1}
+      type="button"
+      to={`/step${currentStep - 1}`}>
       Prev
-    </NavLink>
+    </button>
 
-    <NavLink disabled={currentStep === 3} to={`/step${currentStep + 1}`}>
+    <button
+      disabled={currentStep === 3}
+      onClick={onSubmit}
+      type="button"
+      to={`/step${currentStep + 1}`}>
       Next
-    </NavLink>
+    </button>
   </div>
 );
 
 Steps.propTypes = {
-  currentStep: PropTypes.number.isRequired
+  currentStep: PropTypes.number.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default Steps;
