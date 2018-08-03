@@ -5,8 +5,10 @@ import React from 'react';
 
 import FormLayout from '../components/form-layout';
 
-export default () => (
-  <FormLayout currentStep={2}>
+export const PasswordScreen = () => (
+  <FormLayout
+    currentStep={2}
+    onSubmit={() => console.log('password')}>
     <div className="container">
       <label className="label">Please choose a password</label>
       <div className="input">

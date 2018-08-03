@@ -4,11 +4,15 @@
 // * Ensure the input is an email address.
 // * Ensure the email address is not in use by querying the GraphQL server.
 import React from 'react';
+import { ApolloConsumer, Query, Mutation } from 'react-apollo';
 
-import { Query } from 'react-apollo';
-
-import FormLayout from '../components/form-layout';
-
+import {
+  getLocalState,
+  saveEmail,
+  nextStep,
+} from '../lib/local-storage';
+import { EmailForm } from '../components/email-form';
+import { IS_USER_EXISTS } from '../query';
 const errors = {
   REQUIRED: 'Email is required',
   INVALID: 'Input is not a valid email',
@@ -31,62 +35,67 @@ class EmailScreen extends React.Component {
       error: null,
     };
 
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange({ target: { name, value } }) {
-    this.setState({ [name]: value });
-  }
-
-  onSubmit() {
-    const { email } = this.state;
-    this.setState({ error: null });
+  async onSubmit(email) {
     if (!email) {
-      this.setState({ error: errors.REQUIRED });
-      return;
+      return { error: errors.REQUIRED };
     }
     if (!isValidAddress(email)) {
-      this.setState({ error: errors.INVALID });
-      return;
+      return { error: errors.INVALID };
     }
-    if (this.isEmailExists(email)) {
-      this.setState({ error: errors.IN_USE });
-      return;
+    if (await this.isEmailExists(email)) {
+      return { error: errors.IN_USE };
     }
-    // move to next step and save address
+
+    // save email and step
+    this.saveEmail(email);
+    this.nextStep();
+    // move to next step
+
+    return {};
   }
 
-  isEmailExists(email) {
-    return true;
+  nextStep() {
+    nextStep();
+    this.props.history.push('/step2');
+  }
+
+  saveEmail(email) {
+    saveEmail(email);
   }
 
   render() {
-    const { email, error } = this.state;
+    const { email = '' } = getLocalState();
     return (
       <ApolloConsumer>
-        {() => (
-          <FormLayout currentStep={1} onSubmit={this.onSubmit}>
-            <div className="container">
-              <label className="label">
-                Please enter your email address
-              </label>
-              <div className="input">
-                <input
-                  value={email}
-                  type="email"
-                  required
-                  name="email"
-                  onChange={this.onChange}
-                />
-              </div>
-              {error && <div className="errors">{error}</div>}
-            </div>
-          </FormLayout>
-        )}
+        {client => {
+          // to make the function available in onSubmit
+          // this is a code smell but it works
+          this.isEmailExists = buildIsUserExistsFunction(client);
+          return (
+            <EmailForm
+              initialValue={email}
+              onSubmit={this.onSubmit}
+            />
+          );
+        }}
       </ApolloConsumer>
     );
   }
+}
+
+function buildIsUserExistsFunction(client) {
+  return async function isEmailExists(email) {
+    const {
+      data: { stukentUsers },
+    } = await client.query({
+      query: IS_USER_EXISTS,
+      variables: { email },
+    });
+    return !!(stukentUsers && stukentUsers.length);
+  };
 }
 
 EmailScreen.propTypes = {};

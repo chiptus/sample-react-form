@@ -11,7 +11,7 @@ import {
   TimezoneScreen,
 } from './screens';
 
-const Router = function Router() {
+const Router = function Router({ step }) {
   //Put your routes inside the BrowserRouterStep
   return (
     <BrowserRouter>
@@ -19,7 +19,7 @@ const Router = function Router() {
         <Route path="/step1" component={EmailScreen} />
         <Route path="/step2" component={PasswordScreen} />
         <Route path="/step3" component={TimezoneScreen} />
-        <Redirect exact from="/" to="/step1" />
+        <Redirect exact from="/" to={`/step${step}`} />
       </Switch>
     </BrowserRouter>
   );

@@ -2,11 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+
 import Router from './router.js';
-
+import { getLocalState } from './lib/local-storage';
 import 'normalize.css';
-
 import './index.css';
+
+const localState = getLocalState();
 
 const client = new ApolloClient({
   uri:
@@ -16,7 +18,7 @@ const client = new ApolloClient({
 const App = function App() {
   return (
     <ApolloProvider client={client}>
-      <Router />
+      <Router step={localState.step} />
     </ApolloProvider>
   );
 };
