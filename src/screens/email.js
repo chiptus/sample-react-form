@@ -9,7 +9,7 @@ import { ApolloConsumer, Query, Mutation } from 'react-apollo';
 import {
   getLocalState,
   saveEmail,
-  nextStep,
+  saveStep,
 } from '../lib/local-storage';
 import { EmailForm } from '../components/email-form';
 import { IS_USER_EXISTS } from '../query';
@@ -58,7 +58,7 @@ class EmailScreen extends React.Component {
   }
 
   nextStep() {
-    nextStep();
+    saveStep(2);
     this.props.history.push('/step2');
   }
 

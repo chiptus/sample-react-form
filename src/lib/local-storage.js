@@ -8,8 +8,9 @@ export function getLocalState() {
   return localState;
 }
 
-export function nextStep() {
-  saveKey('step', localState.step + 1);
+// TODO verify step range
+export function saveStep(step) {
+  saveKey('step', step);
 }
 
 export function saveEmail(email) {
@@ -24,7 +25,7 @@ export function saveTimezone(tz) {
   saveKey('timezone', tz);
 }
 
-export function saveKey(key, value) {
+function saveKey(key, value) {
   localState[key] = value;
   saveLocalState();
 }
