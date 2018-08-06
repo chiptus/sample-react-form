@@ -2,23 +2,48 @@
 // * The selectbox is a list of timezones
 // * The timezone names are available using 'tz-ids' library provided for you
 // * The button saves to the database using a GraphQL mutation
-import React from "react";
-import TzIds from "tz-ids";
-import FormLayout from "../components/form-layout";
+import React from 'react';
+import { Mutation } from 'react-apollo';
 
-export default () => (
-  <FormLayout currentStep={3} StepTimezoneScreen>
-    <div className="container">
-      <label className="label">Please choose your timezone</label>
-      <div className="input">
-        <select required>
-          {TzIds.map(tz => (
-            <option key={tz} value={tz}>
-              {tz}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
-  </FormLayout>
-);
+import { ADD_USER } from '../mutation';
+import { TimezoneForm } from '../components/timezone-form';
+import {
+  getLocalState,
+  clearLocalState,
+} from '../lib/local-storage';
+
+export class TimezoneScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  render() {
+    const { timezone } = getLocalState();
+    return (
+      <Mutation mutation={ADD_USER}>
+        {(addUser, { data }) => (
+          <TimezoneForm
+            initialValue={timezone}
+            onSubmit={async timeZone => {
+              const { email, password } = getLocalState();
+
+              // save user in database
+              await addUser({
+                variables: {
+                  user: { email, password, timeZone },
+                },
+              });
+              clearLocalState();
+              // go to confirmation
+              this.props.history.push('/confirmation', {
+                email,
+              });
+            }}
+          />
+        )}
+      </Mutation>
+    );
+  }
+}

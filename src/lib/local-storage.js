@@ -22,9 +22,14 @@ export function savePassword(password) {
   saveKey('password', password);
 }
 
-export function saveTimezone(tz) {
-  saveKey('timezone', tz);
+export function clearLocalState() {
+  localState = { email: '', password: '', step: 1 };
+  saveLocalState();
 }
+
+// export function saveTimezone(tz) {
+//   saveKey('Timezone', tz);
+// }
 
 function saveKey(key, value) {
   localState[key] = value;
@@ -47,7 +52,6 @@ function parse(string) {
     return {
       email: '',
       password: '',
-      timezone: '',
       step: 1,
     };
   }
