@@ -2,6 +2,7 @@
 // * The textbox is required and accepts a password
 // * The button takes the user to the next screen after requirement validation and saving.
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import FormLayout from '../form-layout';
 
@@ -44,7 +45,7 @@ export class PasswordForm extends React.Component {
       this.setState({ error: errors.NOT_STRONG });
       return;
     }
-    this.props.onSubmit();
+    this.props.onSubmit(password);
   }
 
   render() {
@@ -64,7 +65,7 @@ export class PasswordForm extends React.Component {
           {error && <div className="errors">{error}</div>}
           <div className="requirements">
             Must be at least 8 characters<br />
-            Must have letters, numbers, and symbols only<br />
+            Must have letters, numbers, and symbols !@#$%^&*() only<br />
             Must not allow two characters to repeat more than twice
             in a row<br />
             Must have one or more uppercase letters<br />
@@ -75,14 +76,21 @@ export class PasswordForm extends React.Component {
   }
 }
 
+PasswordForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  initialValue: PropTypes.string.isRequired,
+};
+
 function isStrong(password) {
   if (password.length < 8) {
+    console.log('length');
     return false;
   }
 
-  // if (containsIlegalChar(password)) {
-  //   return false;
-  // }
+  if (containsIlegalChar(password)) {
+    console.log('ilegal char');
+    return false;
+  }
 
   if (containsTwoCharsInARow(password)) {
     console.log('two characters');
@@ -96,7 +104,9 @@ function isStrong(password) {
   return true;
 }
 
-function containsIlegalChar(string) {}
+function containsIlegalChar(string) {
+  return /[^\w\d!@#$%^&*()]/.test(string);
+}
 
 function containsTwoCharsInARow(string) {
   return /(.)\1+/.test(string);
