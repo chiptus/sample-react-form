@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormLayout from '../form-layout';
+import { FormLayout } from '../form-layout';
 
 export class EmailForm extends React.Component {
   constructor(props) {

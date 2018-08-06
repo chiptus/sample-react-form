@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import stylesheet from './navigation-bar.css';
 
-const Steps = ({ currentStep, onSubmit }) => (
+export const NavigationBar = ({ currentStep, onSubmit }) => (
   <div className={stylesheet.navigationBar}>
     {currentStep > 1 ? (
       <NavLink className={stylesheet.button} to={`/step${currentStep - 1}`}>
@@ -20,9 +20,7 @@ const Steps = ({ currentStep, onSubmit }) => (
   </div>
 );
 
-Steps.propTypes = {
+NavigationBar.propTypes = {
   currentStep: PropTypes.number.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
-
-export default Steps;

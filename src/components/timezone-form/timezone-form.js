@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TzIds from 'tz-ids';
 
-import FormLayout from '../form-layout';
+import { FormLayout } from '../form-layout';
 
 import stylesheet from './timezone-form.css';
 

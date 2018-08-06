@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormLayout from '../form-layout';
+import { FormLayout } from '../form-layout';
 
 import stylesheet from './password-form.css';
 console.log(stylesheet);
