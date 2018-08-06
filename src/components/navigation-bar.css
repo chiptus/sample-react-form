@@ -7,11 +7,14 @@
 .button {
   background: none;
   border: 0;
+  color: black;
+  text-decoration: none;
   cursor: pointer;
   font-size: 2em;
 }
 
-.button:disabled {
+.button[disabled] {
   pointer-events: none;
   cursor: not-allowed;
+  color: gray;
 }

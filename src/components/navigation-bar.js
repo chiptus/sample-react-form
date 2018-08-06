@@ -6,18 +6,15 @@ import stylesheet from './navigation-bar.css';
 
 const Steps = ({ currentStep, onSubmit }) => (
   <div className={stylesheet.navigationBar}>
-    <button
-      className={stylesheet.button}
-      disabled={currentStep === 1}
-      type="button"
-      to={`/step${currentStep - 1}`}>
-      <i className="fa fa-arrow-left" />
-    </button>
+    {currentStep > 1 ? (
+      <NavLink className={stylesheet.button} to={`/step${currentStep - 1}`}>
+        <i className="fa fa-arrow-left" />
+      </NavLink>
+    ) : (
+      <div />
+    )}
 
-    <button
-      className={stylesheet.button}
-      onClick={onSubmit}
-      type="button">
+    <button className={stylesheet.button} onClick={onSubmit} type="button">
       <i className="fa fa-arrow-right" />
     </button>
   </div>

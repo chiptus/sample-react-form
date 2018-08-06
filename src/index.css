@@ -11,11 +11,6 @@ body {
   align-items: center;
 }
 
-a[disabled] {
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
 #app {
   width: 60%;
   margin: auto;

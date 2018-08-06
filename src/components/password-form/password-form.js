@@ -98,7 +98,7 @@ function isStrong(password) {
   if (!containsUppercaseLetters(password)) {
     return { success: false, reason: REQUIREMENTS.UPPERCASE };
   }
-  return true;
+  return { success: true };
 }
 
 function containsIlegalChar(string) {
