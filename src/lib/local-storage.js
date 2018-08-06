@@ -18,7 +18,6 @@ export function saveEmail(email) {
 }
 
 export function savePassword(password) {
-  console.log('saving password', password);
   saveKey('password', password);
 }
 

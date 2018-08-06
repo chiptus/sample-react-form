@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { FormLayout } from '../form-layout';
 
 import stylesheet from './password-form.css';
-console.log(stylesheet);
+
 export class PasswordForm extends React.Component {
   constructor(props) {
     super(props);
