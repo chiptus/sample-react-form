@@ -13,12 +13,6 @@ import {
 } from '../lib/local-storage';
 
 export class TimezoneScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.onSubmit = this.onSubmit.bind(this);
-  }
-
   render() {
     const { timezone } = getLocalState();
     return (

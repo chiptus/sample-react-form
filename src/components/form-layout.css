@@ -5,15 +5,12 @@
   height: 100%;
 }
 
-.formLayout .container {
-}
-
 .formLayout .container * + * {
   margin-top: 1em;
 }
 
 .formLayout .errors {
-  /* display: none; */
+  color: #f22b29;
 }
 
 .formLayout .input input,

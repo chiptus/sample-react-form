@@ -4,26 +4,29 @@ import TzIds from 'tz-ids';
 
 import FormLayout from '../form-layout';
 
+import stylesheet from './timezone-form.css';
+
 export class TimezoneForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      timeZone: props.initialValue,
+      timeZone: '',
+      filter: '',
+      error: '',
     };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
-  derivePropsFromState(props, state) {
-    if (props.initialValue === state.timeZone) {
-      return null;
-    }
-    return { timeZone: props.initialValue };
-  }
-
   onSubmit() {
+    const { timeZone } = this.state;
+    if (!timeZone) {
+      this.setState({ error: 'Timezone is required' });
+      return;
+    }
+    this.setState({ error: '' });
     this.props.onSubmit(this.state.timeZone);
   }
 
@@ -32,25 +35,36 @@ export class TimezoneForm extends React.Component {
   }
 
   render() {
+    const { timeZone, filter, error } = this.state;
     return (
       <FormLayout currentStep={3} onSubmit={this.onSubmit}>
         <div className="container">
           <label className="label">
             Please choose your timezone
           </label>
-          <div className="input">
+          <div className={['input', stylesheet.input].join(' ')}>
+            <input
+              name="filter"
+              onChange={this.onChange}
+              value={filter}
+              placeholder="Type here to filter the list"
+            />
             <select
               required
               name="timeZone"
-              value={this.state.timeZone}
+              value={timeZone}
               onChange={this.onChange}>
-              {TzIds.map(tz => (
+              <option value="" />
+              {TzIds.filter(tz =>
+                tz.toLowerCase().includes(filter.toLowerCase())
+              ).map(tz => (
                 <option key={tz} value={tz}>
                   {tz}
                 </option>
               ))}
             </select>
           </div>
+          {error && <div className="errors">{error}</div>}
         </div>
       </FormLayout>
     );
@@ -58,6 +72,5 @@ export class TimezoneForm extends React.Component {
 }
 
 TimezoneForm.propTypes = {
-  initialValue: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };

@@ -9,6 +9,7 @@ import {
   EmailScreen,
   PasswordScreen,
   TimezoneScreen,
+  ConfirmationScreen,
 } from './screens';
 
 const Router = function Router({ step }) {
@@ -19,6 +20,10 @@ const Router = function Router({ step }) {
         <Route path="/step1" component={EmailScreen} />
         <Route path="/step2" component={PasswordScreen} />
         <Route path="/step3" component={TimezoneScreen} />
+        <Route
+          path="/confirmation"
+          component={ConfirmationScreen}
+        />
         <Redirect exact from="/" to={`/step${step}`} />
       </Switch>
     </BrowserRouter>

@@ -24,7 +24,6 @@ export class EmailForm extends React.Component {
   }
 
   async onSubmit() {
-    console.log('calling on submit');
     const { error } = await this.props.onSubmit(this.state.email);
     if (error) {
       this.setState({ error });

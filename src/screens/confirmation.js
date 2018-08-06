@@ -1,3 +1,15 @@
-import React from "react";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
-export default () => <div>Account has been created</div>;
+export const ConfirmationScreen = ({
+  location: {
+    state: { email },
+  },
+}) =>
+  email ? (
+    console.log(email) || (
+      <div>Account for {email} has been created</div>
+    )
+  ) : (
+    <Redirect to="/step1" />
+  );
