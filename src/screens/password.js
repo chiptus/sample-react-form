@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { PasswordForm } from '../components/password-form';
 
 import {
@@ -35,3 +35,8 @@ export class PasswordScreen extends React.Component {
     );
   }
 }
+
+PasswordScreen.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired })
+    .isRequired,
+};

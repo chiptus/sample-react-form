@@ -4,7 +4,8 @@
 // * Ensure the input is an email address.
 // * Ensure the email address is not in use by querying the GraphQL server.
 import React from 'react';
-import { ApolloConsumer, Query, Mutation } from 'react-apollo';
+import PropTypes from 'prop-types';
+import { ApolloConsumer } from 'react-apollo';
 
 import {
   getLocalState,
@@ -98,5 +99,8 @@ function buildIsUserExistsFunction(client) {
   };
 }
 
-EmailScreen.propTypes = {};
+EmailScreen.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired })
+    .isRequired,
+};
 export default EmailScreen;

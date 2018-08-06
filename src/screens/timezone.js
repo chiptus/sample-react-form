@@ -3,6 +3,7 @@
 // * The timezone names are available using 'tz-ids' library provided for you
 // * The button saves to the database using a GraphQL mutation
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Mutation } from 'react-apollo';
 
 import { ADD_USER } from '../mutation';
@@ -41,3 +42,8 @@ export class TimezoneScreen extends React.Component {
     );
   }
 }
+
+TimezoneScreen.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired })
+    .isRequired,
+};

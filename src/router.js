@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   BrowserRouter,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
+
 import {
   EmailScreen,
   PasswordScreen,
@@ -28,6 +30,10 @@ const Router = function Router({ step }) {
       </Switch>
     </BrowserRouter>
   );
+};
+
+Router.propTypes = {
+  step: PropTypes.number.isRequired,
 };
 
 export default Router;
