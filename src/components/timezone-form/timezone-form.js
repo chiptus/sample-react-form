@@ -39,32 +39,19 @@ export class TimezoneForm extends React.Component {
     return (
       <FormLayout currentStep={3} onSubmit={this.onSubmit}>
         <div className="container">
-          <label className="label">
-            Please choose your timezone
-          </label>
+          <label className="label">Please choose your timezone</label>
           <div className={['input', stylesheet.input].join(' ')}>
-            <input
-              name="filter"
-              onChange={this.onChange}
-              value={filter}
-              placeholder="Type here to filter the list"
-            />
-            <select
-              required
-              name="timeZone"
-              value={timeZone}
-              onChange={this.onChange}>
+            <input name="filter" onChange={this.onChange} value={filter} placeholder="Type here to filter the list" />
+            <select required name="timeZone" value={timeZone} onChange={this.onChange}>
               <option value="" />
-              {TzIds.filter(tz =>
-                tz.toLowerCase().includes(filter.toLowerCase())
-              ).map(tz => (
+              {TzIds.filter(tz => tz.toLowerCase().includes(filter.toLowerCase())).map(tz => (
                 <option key={tz} value={tz}>
                   {tz}
                 </option>
               ))}
             </select>
           </div>
-          {error && <div className="errors">{error}</div>}
+          <div className="errors">{error}</div>
         </div>
       </FormLayout>
     );

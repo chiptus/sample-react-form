@@ -5,19 +5,16 @@
   height: 100%;
 }
 
-.formLayout .container * + * {
+.formLayout .container > * + * {
   margin-top: 1em;
 }
 
 .formLayout .errors {
   color: #f22b29;
+  height: 1em;
 }
 
 .formLayout .input input,
 .formLayout .input select {
   width: 100%;
-}
-
-.formLayout .requirements {
-  font-size: 0.8em;
 }

@@ -39,19 +39,11 @@ export class EmailForm extends React.Component {
     return (
       <FormLayout currentStep={1} onSubmit={this.onSubmit}>
         <div className="container">
-          <label className="label">
-            Please enter your email address
-          </label>
+          <label className="label">Please enter your email address</label>
           <div className="input">
-            <input
-              value={email}
-              type="email"
-              required
-              name="email"
-              onChange={this.onChange}
-            />
+            <input value={email} type="email" required name="email" onChange={this.onChange} />
           </div>
-          {error && <div className="errors">{error}</div>}
+          <div className="errors">{error}</div>
         </div>
       </FormLayout>
     );
