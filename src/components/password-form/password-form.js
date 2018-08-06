@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { FormLayout } from '../form-layout';
+import { REQUIREMENTS, errors, isStrong } from './helpers';
 
 import stylesheet from './password-form.css';
 
@@ -35,11 +36,16 @@ export class PasswordForm extends React.Component {
 
   onSubmit() {
     const { password } = this.state;
+    // clear error state
     this.setState({ error: '', failedRequirement: 0 });
+
+    // password is required
     if (!password) {
       this.setState({ error: errors.REQUIRED });
       return;
     }
+
+    // check password strength
     const { success: isPasswordStrong, reason: failedRequirement } = isStrong(password);
     if (!isPasswordStrong) {
       this.setState({
@@ -48,11 +54,28 @@ export class PasswordForm extends React.Component {
       });
       return;
     }
+
     this.props.onSubmit(password);
   }
 
+  renderRequirements() {
+    const { failedRequirement } = this.state;
+    return (
+      <ul className={stylesheet.requirements}>
+        <li className={failedRequirement === REQUIREMENTS.LENGTH ? stylesheet.active : ''}>Must be at least 8 characters</li>
+        <li className={failedRequirement === REQUIREMENTS.ILLEGAL_CHAR ? stylesheet.active : ''}>
+          Must have letters, numbers, and symbols !@#$%^&*() only
+        </li>
+        <li className={failedRequirement === REQUIREMENTS.DOUBLE ? stylesheet.active : ''}>
+          Must not allow two characters to repeat more than twice in a row
+        </li>
+        <li className={failedRequirement === REQUIREMENTS.UPPERCASE ? stylesheet.active : ''}>Must have one or more uppercase letters</li>
+      </ul>
+    );
+  }
+
   render() {
-    const { error, password, failedRequirement } = this.state;
+    const { error, password } = this.state;
     return (
       <FormLayout currentStep={2} onSubmit={this.onSubmit}>
         <div className="container">
@@ -61,16 +84,7 @@ export class PasswordForm extends React.Component {
             <input type="password" name="password" value={password} onChange={this.onChange} />
           </div>
           <div className="errors">{error}</div>
-          <ul className={stylesheet.requirements}>
-            <li className={failedRequirement === REQUIREMENTS.LENGTH ? stylesheet.active : ''}>Must be at least 8 characters</li>
-            <li className={failedRequirement === REQUIREMENTS.ILLEGAL_CHAR ? stylesheet.active : ''}>
-              Must have letters, numbers, and symbols !@#$%^&*() only
-            </li>
-            <li className={failedRequirement === REQUIREMENTS.DOUBLE ? stylesheet.active : ''}>
-              Must not allow two characters to repeat more than twice in a row
-            </li>
-            <li className={failedRequirement === REQUIREMENTS.UPPERCASE ? stylesheet.active : ''}>Must have one or more uppercase letters</li>
-          </ul>
+          {this.renderRequirements()}
         </div>
       </FormLayout>
     );
@@ -80,47 +94,4 @@ export class PasswordForm extends React.Component {
 PasswordForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   initialValue: PropTypes.string.isRequired,
-};
-
-function isStrong(password) {
-  if (password.length < 8) {
-    return { success: false, reason: REQUIREMENTS.LENGTH };
-  }
-
-  if (containsIlegalChar(password)) {
-    return { success: false, reason: REQUIREMENTS.ILLEGAL_CHAR };
-  }
-
-  if (containsTwoCharsInARow(password)) {
-    return { success: false, reason: REQUIREMENTS.DOUBLE };
-  }
-
-  if (!containsUppercaseLetters(password)) {
-    return { success: false, reason: REQUIREMENTS.UPPERCASE };
-  }
-  return { success: true };
-}
-
-function containsIlegalChar(string) {
-  return /[^\w\d!@#$%^&*()]/.test(string);
-}
-
-function containsTwoCharsInARow(string) {
-  return /(.)\1+/.test(string);
-}
-
-function containsUppercaseLetters(string) {
-  return /[A-Z]/.test(string);
-}
-
-const errors = {
-  REQUIRED: 'Password is required',
-  NOT_STRONG: 'Password is not strong enough',
-};
-
-const REQUIREMENTS = {
-  LENGTH: 1,
-  ILLEGAL_CHAR: 2,
-  DOUBLE: 3,
-  UPPERCASE: 4,
 };

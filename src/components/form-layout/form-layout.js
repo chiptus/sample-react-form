@@ -6,8 +6,12 @@ import { ProgressBar } from './progress-bar';
 
 import './form-layout.css';
 
-export const FormLayout = ({ children, currentStep, onSubmit }) => (
-  <form className="formLayout">
+export const FormLayout = ({
+  children,
+  currentStep,
+  onSubmit,
+}) => (
+  <form className="formLayout" onSubmit={e => e.preventDefault()}>
     <ProgressBar currentStep={currentStep} />
     {children}
     <NavigationBar currentStep={currentStep} onSubmit={onSubmit} />
